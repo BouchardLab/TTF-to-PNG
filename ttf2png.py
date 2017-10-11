@@ -10,7 +10,7 @@ TTF_PATH = sys.argv[1]
 FONT_SIZE = sys.argv[2]
 
 head, tail = os.path.split(TTF_PATH)
-font_name, ext = os.path.splittext(tail)
+font_name, ext = os.path.splitext(tail)
 
 TEXTS_DIR = font_name + "_texts"
 IMAGES_DIR = font_name + "_images"
