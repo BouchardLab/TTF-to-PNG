@@ -5,11 +5,17 @@ import subprocess
 
 from fontTools.ttLib import TTFont
 
-TEXTS_DIR = "texts"
-IMAGES_DIR = "images"
 
 TTF_PATH = sys.argv[1]
 FONT_SIZE = sys.argv[2]
+
+head, tail = os.path.split(TTF_PATH)
+font_name, ext = os.path.splittext(tail)
+
+TEXTS_DIR = font_name + "_texts"
+IMAGES_DIR = font_name + "_images"
+
+
 TTF_NAME, TTF_EXT = os.path.splitext(os.path.basename(TTF_PATH))
 
 ttf = TTFont(TTF_PATH, 0, verbose=0, allowVID=0, ignoreDecompileErrors=True, fontNumber=-1)
