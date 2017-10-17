@@ -18,20 +18,19 @@ IMAGES_DIR = font_name + "_images"
 
 TTF_NAME, TTF_EXT = os.path.splitext(os.path.basename(TTF_PATH))
 
-ttf = TTFont(TTF_PATH, 0, verbose=0, allowVID=0, ignoreDecompileErrors=True, fontNumber=-1)
-
 for d in [TEXTS_DIR, IMAGES_DIR]:
     if not os.path.isdir(d):
         os.mkdir(d)
+
+ttf = TTFont(TTF_PATH, 0, allowVID=0, ignoreDecompileErrors=True, fontNumber=-1)
 
 for x in ttf["cmap"].tables:
     for y in x.cmap.items():
         char_unicode = unichr(y[0])
         char_utf8 = char_unicode.encode('utf_8')
         char_name = y[1]
-        f = open(os.path.join(TEXTS_DIR, char_name + '.txt'), 'w')
-        f.write(char_utf8)
-        f.close()
+        with open(os.path.join(TEXTS_DIR, char_name + '.txt'), 'w') as f:
+            f.write(char_utf8)
 ttf.close()
 
 files = os.listdir(TEXTS_DIR)
